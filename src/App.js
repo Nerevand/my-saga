@@ -21,7 +21,7 @@ function App(props) {
         </p>
         <div
           className="App-link"
-          onClick={handleClick}
+          onClick={handleClick}       //call our function with action, then line 11
         >
           Learn React
         </div>
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onIncrement         //added our action to bindActionCreators, then line 11
+  onIncrement         //added our action to bindActionCreators, then line 24
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
