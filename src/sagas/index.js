@@ -2,8 +2,8 @@ import { put, call, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 const requestToServer = (payload) => {
-    return axios.put('https://jsonplaceholder.typicode.com/posts/11', payload)      //modify post with id=11, change title in this post
-      .then(response => response)
+    return axios.post('https://jsonplaceholder.typicode.com/posts', payload)      //modify post with id=11, change title in this post
+      .then(response => response.data)
       .catch(err => err);
   }
 
