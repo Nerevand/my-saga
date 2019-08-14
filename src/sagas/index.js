@@ -2,18 +2,22 @@ import { put, call, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 const requestToServer = (payload) => {
-    return axios.post('https://jsonplaceholder.typicode.com/posts', payload)      //modify post with id=11, change title in this post
-      .then(response => response.data)
-      .catch(err => err);
-  }
-
-export function* incrementAsync(obj) {       //here we have obj(from ../App.js)
-    console.log("action", obj);
-    const data = yield call(requestToServer, {  title: 'new text here' }); //call our axios function
-    console.log("data", data);      
-    yield put({ type: 'INCREMENT', payload: data });        //write our data to redux store.
+    return axios.get('https://dog.ceo/api/breeds/image/random', payload)
+        .then(response => response.data)
+        .catch(err => err);
 }
 
-export default function* rootSaga() {
-    yield takeEvery('INCREMENT_ASYNC', incrementAsync)      //get all action with INCREMENT_ASYNC and call function incrementAsync
+export function* workerSaga(obj) {       //here we have obj(from ../App.js)
+    try {
+        console.log("action", obj);
+        const data = yield call(requestToServer, { title: 'new text here' }); //call our axios function(also you can add params)
+        console.log("data", data);
+        yield put({ type: 'INCREMENT', payload: data });        //write our data to redux store.
+    } catch (e) {
+        console.log(e); //dispatch your error here
+    }
+}
+
+export default function* watcherSaga() {
+    yield takeEvery('INCREMENT_ASYNC', workerSaga)      //get all action with INCREMENT_ASYNC and call function incrementAsync
 }
