@@ -1,8 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+
 import logo from './logo.svg';
 import './App.css';
+import { onIncrement } from './actions';        //import action then watch line 40
 
-function App() {
+function App(props) {
+  const handleClick = () => {
+    const { onIncrement } = props;          //now our action is in props, get it 
+    onIncrement({mail: 'mail@gmail.com'});  //and call with params(if needed)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,17 +19,25 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
+        <div
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleClick}
         >
           Learn React
-        </a>
+        </div>
       </header>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    userData: state
+  }
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  onIncrement         //added our action to bindActionCreators, then line 11
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
