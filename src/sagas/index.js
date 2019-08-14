@@ -9,7 +9,7 @@ const createBlaBla = (payload) => {
 
 export function* incrementAsync(obj) {       //here we have obj(from ../App.js)
     console.log("action", obj);
-    const data = yield call(createBlaBla, { mail: obj.mail, age: 26 }); //call our axios function
+    const data = yield call(createBlaBla, { mail: obj.mail, age: 100 }); //call our axios function
     console.log("data", data);      
     yield put({ type: 'INCREMENT', payload: data });        //write our data to redux store
 }
