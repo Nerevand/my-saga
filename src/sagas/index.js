@@ -10,9 +10,9 @@ const requestToServer = (payload) => {
 export function* workerSaga(obj) {       //here we have obj(from ../App.js)
     try {
         console.log("action", obj);
-        const data = yield call(requestToServer, { title: 'new text here' }); //call our axios function(also you can add params)
+        const data = yield call(requestToServer, { random: 'text' }); //call our axios function(also you can add params)
         console.log("data", data);
-        yield put({ type: 'INCREMENT', payload: data });        //write our data to redux store.
+        yield put({ type: 'INCREMENT', payload: data });        //write our data to redux store. Watch reducers file def.js
     } catch (e) {
         console.log(e); //dispatch your error here
     }

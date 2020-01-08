@@ -1,8 +1,4 @@
-export default function counter(state=[], action) {
-    switch (action.type) {
-      case 'INCREMENT':
-        return {...state, data: action.payload}
-      default:
-        return state
-    }
-  }
+export default function counter(state = [], action) {
+  if (action.type === 'INCREMENT') return { ...state, data: action.payload }
+  else return state
+}
